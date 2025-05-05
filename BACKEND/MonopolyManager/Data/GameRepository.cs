@@ -22,14 +22,14 @@ public class GameRepository : IGameRepository
         return _repo;
     }
 
-    public Game? Read(int id)
+    public Game? Read(string key)
     {
-        return _repo.FirstOrDefault(g => g.Id == id);
+        return _repo.FirstOrDefault(g => g.Key == key);
     }
 
     public void Update(Game game)
     {
-        Game? gameToUpdate = _repo.FirstOrDefault(g => g.Id == game.Id);
+        Game? gameToUpdate = _repo.FirstOrDefault(g => g.Key == game.Key);
         if (gameToUpdate == null)
         {
             return;
@@ -37,12 +37,11 @@ public class GameRepository : IGameRepository
         gameToUpdate.Owner = game.Owner;
         gameToUpdate.Players = game.Players;
         gameToUpdate.Transactions = game.Transactions;
-        gameToUpdate.AccessToken = game.AccessToken;
     }
 
-    public void Delete(int id)
+    public void Delete(string key)
     {
-        Game? gameToDelete = _repo.FirstOrDefault(g => g.Id == id);
+        Game? gameToDelete = _repo.FirstOrDefault(g => g.Key == key);
         if (gameToDelete == null)
         {
             return;

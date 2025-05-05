@@ -7,9 +7,9 @@ public interface IGameRepository
     void Create(Game game);
     
     IEnumerable<Game> Read();
-    Game? Read(int id);
+    Game? Read(string key);
     
     void Update(Game game);
     
-    void Delete(int id);
+    void Delete(string key);
 }
