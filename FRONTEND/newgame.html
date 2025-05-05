@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Új játék létrehozása</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column min-vh-100">
+  <!-- Header -->
+  <nav class="navbar bg-primary">
+    <div class="container justify-content-center">
+      <span class="navbar-brand mb-0 h1 text-white fw-bold">Monopoly Manager</span>
+    </div>
+  </nav>
+
+  <!-- Centered Form Box -->
+  <div class="container flex-grow-1 d-flex justify-content-center align-items-center">
+    <div class="card shadow" style="min-width:340px;max-width:400px;width:100%;">
+      <div class="card-header bg-primary text-white fw-bold text-center">
+        Új játék létrehozása
+      </div>
+      <div class="card-body p-4">
+        <form id="createGameForm">
+          <div class="mb-3">
+            <label for="startingMoney" class="form-label">Kezdő pénz</label>
+            <input type="number" class="form-control" id="startingMoney" name="startingMoney" min="0" required>
+          </div>
+          <div class="mb-3">
+            <label for="startFieldMoney" class="form-label">Start mező pénz</label>
+            <input type="number" class="form-control" id="startFieldMoney" name="startFieldMoney" min="0" required>
+          </div>
+          <div id="playerFields">
+            <div class="mb-3">
+              <label for="player1" class="form-label">Játékos 1</label>
+              <input type="text" class="form-control" id="player1" name="player1" required>
+            </div>
+            <div class="mb-3">
+              <label for="player2" class="form-label">Játékos 2</label>
+              <input type="text" class="form-control" id="player2" name="player2" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 d-grid">
+              <button type="button" id="addPlayerBtn" class="btn btn-outline-primary">Új játékos</button>
+            </div>
+            <div class="col-6 d-grid">
+              <button type="submit" class="btn btn-primary">Játék létrehozása</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-primary text-white text-center py-3 mt-auto">
+    Created by Levente Bajnoczi
+  </footer>
+
+  <script>
+    // Add new player field functionality
+    let playerCount = 2;
+    document.getElementById('addPlayerBtn').addEventListener('click', function() {
+      playerCount++;
+      const playerFields = document.getElementById('playerFields');
+      const div = document.createElement('div');
+      div.className = 'mb-3';
+      div.innerHTML = `
+        <label for="player${playerCount}" class="form-label">Játékos ${playerCount}</label>
+        <input type="text" class="form-control" id="player${playerCount}" name="player${playerCount}" required>
+      `;
+      playerFields.appendChild(div);
+    });
+
+    // Optional: Prevent form submission for demonstration
+    document.getElementById('createGameForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Játék létrehozva!');
+    });
+  </script>
+</body>
+</html>

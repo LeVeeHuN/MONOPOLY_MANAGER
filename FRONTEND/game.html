@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monopoly Manager</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column min-vh-100">
+  <nav class="navbar bg-primary">
+    <div class="container justify-content-center">
+      <span class="navbar-brand mb-0 h1 text-white fw-bold">Monopoly Manager</span>
+    </div>
+  </nav>
+  <div class="container pt-4 flex-grow-1">
+    <!-- Top boxes row -->
+    <div class="row mb-4">
+      <div class="col-auto">
+        <div class="d-flex align-items-center gap-3">
+          <!-- Blue box with text and button inside -->
+          <div class="bg-primary text-white rounded fw-bold d-flex align-items-center px-2" style="width: 150px; height: 44px;">
+            <span id="blueBoxText" class="flex-grow-1 ps-2" style="letter-spacing:2px;">ABC123</span>
+            <button id="toggleBtn" class="btn btn-outline-light btn-sm ms-2" type="button">Elrejt</button>
+          </div>
+          <!-- Gray box without button -->
+          <div class="bg-secondary text-white px-3 py-2 rounded fw-bold" style="width: 90px; text-align: center; letter-spacing: 2px;">
+            XYZ789
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Transaction, Transactions, and Players row -->
+    <div class="row">
+      <!-- Transaction Card (wider) -->
+      <div class="col-md-6 col-lg-5 mb-4">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white fw-bold">
+            Tranzakció létrehozása
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="mb-3">
+                <label for="transactionType" class="form-label">Tranzakció típusa</label>
+                <select class="form-select" id="transactionType">
+                  <option>Utalás</option>
+                  <option>Pénz hozzáadás</option>
+                  <option>Pénz elvétel</option>
+                  <option>Start</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="fromPlayer" class="form-label">kitől</label>
+                <select class="form-select" id="fromPlayer">
+                  <option>Anna</option>
+                  <option>Béla</option>
+                  <option>Cecil</option>
+                  <option>Dávid</option>
+                  <option>Emese</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="toPlayer" class="form-label">kinek</label>
+                <select class="form-select" id="toPlayer">
+                  <option>Anna</option>
+                  <option>Béla</option>
+                  <option>Cecil</option>
+                  <option>Dávid</option>
+                  <option>Emese</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="amount" class="form-label">Összeg</label>
+                <input type="number" class="form-control" id="amount" min="0" placeholder="0">
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Tranzakció végrehajtása</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- Transactions Card (now in the middle) -->
+      <div class="col-md-3 col-lg-4 mb-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-header bg-primary text-white fw-bold">
+            Tranzakciók
+          </div>
+          <div class="card-body p-2" style="max-height: 400px; overflow-y: auto;">
+            <!-- Example transaction cards with requested colors -->
+            <div class="card mb-2 bg-warning text-dark">
+              <div class="card-body py-2 px-3">
+                <strong>Utalás:</strong> Anna → Béla<br>
+                <small>Összeg: 200</small>
+              </div>
+            </div>
+            <div class="card mb-2 bg-success text-white">
+              <div class="card-body py-2 px-3">
+                <strong>Pénz hozzáadás:</strong> Cecil<br>
+                <small>Összeg: 100</small>
+              </div>
+            </div>
+            <div class="card mb-2 bg-danger text-white">
+              <div class="card-body py-2 px-3">
+                <strong>Pénz elvétel:</strong> Dávid<br>
+                <small>Összeg: 50</small>
+              </div>
+            </div>
+            <div class="card mb-2 bg-primary text-white">
+              <div class="card-body py-2 px-3">
+                <strong>Start:</strong> Emese<br>
+                <small>Összeg: 200</small>
+              </div>
+            </div>
+            <div class="card mb-2 bg-warning text-dark">
+              <div class="card-body py-2 px-3">
+                <strong>Utalás:</strong> Béla → Anna<br>
+                <small>Összeg: 300</small>
+              </div>
+            </div>
+            <div class="card mb-2 bg-success text-white">
+              <div class="card-body py-2 px-3">
+                <strong>Pénz hozzáadás:</strong> Dávid<br>
+                <small>Összeg: 250</small>
+              </div>
+            </div>
+            <!-- Add more transactions as needed -->
+          </div>
+        </div>
+      </div>
+      <!-- Players Card (now rightmost) -->
+      <div class="col-md-3 col-lg-3 mb-4">
+        <div class="card shadow-sm">
+          <div class="card-header bg-secondary text-white fw-bold">
+            Játékosok
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Anna
+              <span class="badge bg-success rounded-pill">1500</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Béla
+              <span class="badge bg-success rounded-pill">1500</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Cecil
+              <span class="badge bg-success rounded-pill">1500</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Dávid
+              <span class="badge bg-success rounded-pill">1500</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Emese
+              <span class="badge bg-success rounded-pill">1500</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="bg-primary text-white text-center py-3">
+    Created by Levente Bajnoczi
+  </footer>
+  <script>
+    // Toggle show/hide for blue box text
+    const blueBoxText = document.getElementById('blueBoxText');
+    const toggleBtn = document.getElementById('toggleBtn');
+    const originalText = blueBoxText.textContent;
+    let hidden = false;
+
+    toggleBtn.addEventListener('click', function() {
+      if (!hidden) {
+        blueBoxText.textContent = '******';
+        toggleBtn.textContent = 'Mutat';
+        hidden = true;
+      } else {
+        blueBoxText.textContent = originalText;
+        toggleBtn.textContent = 'Elrejt';
+        hidden = false;
+      }
+    });
+  </script>
+</body>
+</html>
