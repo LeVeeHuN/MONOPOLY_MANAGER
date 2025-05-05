@@ -6,4 +6,6 @@ public class Game
     public List<User> Players { get; set; }
     public List<Transaction> Transactions { get; set; }
     public User Owner { get; set; }
+    public int StartMoney { get; set; }
+    public int StartTileMoney { get; set; }
 }

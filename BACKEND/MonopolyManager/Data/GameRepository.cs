@@ -37,6 +37,8 @@ public class GameRepository : IGameRepository
         gameToUpdate.Owner = game.Owner;
         gameToUpdate.Players = game.Players;
         gameToUpdate.Transactions = game.Transactions;
+        gameToUpdate.StartMoney = game.StartMoney;
+        gameToUpdate.StartTileMoney = game.StartTileMoney;
     }
 
     public void Delete(string key)
