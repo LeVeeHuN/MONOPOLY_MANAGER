@@ -2,8 +2,7 @@ namespace MonopolyManager.Models;
 
 public class Game
 {
-    public int Id { get; set; }
-    public string AccessToken { get; set; }
+    public string Key { get; set; } // primary key
     public List<User> Players { get; set; }
     public List<Transaction> Transactions { get; set; }
     public User Owner { get; set; }
