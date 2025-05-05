@@ -12,4 +12,6 @@ public interface IGameRepository
     void Update(Game game);
     
     void Delete(string key);
+    
+    bool KeyExists(string key);
 }

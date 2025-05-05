@@ -24,7 +24,13 @@ public class GameRepository : IGameRepository
 
     public Game? Read(string key)
     {
-        return _repo.FirstOrDefault(g => g.Key == key);
+        Game? game = _repo.FirstOrDefault(g => g.Key == key);
+        if (game == null)
+        {
+            game = _repo.FirstOrDefault(g => g.ViewKey == key);
+        }
+
+        return game;
     }
 
     public void Update(Game game)
@@ -34,7 +40,6 @@ public class GameRepository : IGameRepository
         {
             return;
         }
-        gameToUpdate.Owner = game.Owner;
         gameToUpdate.Players = game.Players;
         gameToUpdate.Transactions = game.Transactions;
         gameToUpdate.StartMoney = game.StartMoney;
@@ -49,5 +54,17 @@ public class GameRepository : IGameRepository
             return;
         }
         _repo.Remove(gameToDelete);
+    }
+
+    public bool KeyExists(string key)
+    {
+        foreach (Game game in _repo)
+        {
+            if (game.Key == key || game.ViewKey == key)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

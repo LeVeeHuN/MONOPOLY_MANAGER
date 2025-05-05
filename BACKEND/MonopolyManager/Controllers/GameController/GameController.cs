@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MonopolyManager.Data;
 using MonopolyManager.Models;
+using MonopolyManager.Models.OutgoingData;
 using MonopolyManager.Models.IncomingData;
 
 namespace MonopolyManager.Controllers.GameController;
@@ -16,16 +17,33 @@ public sealed class GameController
         _repo = repo;
     }
 
-    public Game Create(GameCreationData data)
+    [HttpPost]
+    public GameCreationDataOut Create(GameCreationDataIn dataIn)
     {
-        throw new NotImplementedException();
+        Game newGame = new Game();
+        newGame.Key = GenerateNewGameKey();
+        newGame.ViewKey = GenerateNewGameKey();
+        newGame.StartMoney = dataIn.StartMoney;
+        newGame.StartTileMoney = dataIn.StartTileMoney;
+        newGame.Players = dataIn.Players;
+        newGame.Transactions = new List<Transaction>();
+        
+        _repo.Create(newGame);
+        GameCreationDataOut dataOut = new GameCreationDataOut() {Key = newGame.Key, ViewKey = newGame.ViewKey};
+        return dataOut;
+    }
+
+    [HttpGet("{key}")]
+    public Game? Get(string key)
+    {
+        return _repo.Read(key);
     }
 
     private string GenerateNewGameKey()
     {
         // Look at that! The key looks like a neptun code :)
         
-        const string characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const string characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         const string numbers = "0123456789";
         const string allCharacters = characters + numbers;
         
@@ -37,10 +55,9 @@ public sealed class GameController
         }
 
         // Check if key is used
-        Game? game = _repo.Read(key);
-        if (game != null)
+        if (_repo.KeyExists(key))
         {
-            return GenerateNewGameKey();
+            GenerateNewGameKey();
         }
 
         return key;
