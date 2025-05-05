@@ -18,15 +18,19 @@ public sealed class GameController
     }
 
     [HttpPost]
-    public GameCreationDataOut Create(GameCreationDataIn dataIn)
+    public GameCreationDataOut Create([FromBody] GameCreationDataIn dataIn)
     {
         Game newGame = new Game();
         newGame.Key = GenerateNewGameKey();
         newGame.ViewKey = GenerateNewGameKey();
         newGame.StartMoney = dataIn.StartMoney;
         newGame.StartTileMoney = dataIn.StartTileMoney;
-        newGame.Players = dataIn.Players;
         newGame.Transactions = new List<Transaction>();
+
+        foreach (var player in dataIn.Players)
+        {
+            newGame.Players.Add(new Player(){Money = dataIn.StartMoney, Name = player});
+        }
         
         _repo.Create(newGame);
         GameCreationDataOut dataOut = new GameCreationDataOut() {Key = newGame.Key, ViewKey = newGame.ViewKey};
