@@ -1,3 +1,5 @@
+using MonopolyManager.Data;
+
 namespace MonopolyManager
 {
     public class Program
@@ -6,6 +8,7 @@ namespace MonopolyManager
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSingleton<IGameRepository, GameRepository>();
 
 
             var app = builder.Build();
