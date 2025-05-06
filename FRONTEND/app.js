@@ -53,6 +53,10 @@ function createTransaction(event)
     const to = toSelector.value
 
     const transactionCreateData = new TransactionCreateData(key, type, amount, from, to)
+    if (type == 4)
+    {
+        transactionCreateData.amount = 2000000
+    }
     const jsonString = JSON.stringify(transactionCreateData)
     console.log(transactionCreateData)
     
@@ -64,7 +68,10 @@ function createTransaction(event)
         },
         body: jsonString
     })
-    .then(response => {
+    .then(response => response.json())
+    .then(responseData => {
+        console.log(responseData);
+        
         reset()
     })
     .catch(error => {
@@ -127,20 +134,20 @@ function transactionTypeChanged()
 
 function removeDuplicateNames()
 {
-    const selectedName = fromSelector.value
+    // const selectedName = fromSelector.value
 
-    while (toSelector.firstChild)
-    {
-        toSelector.removeChild(toSelector.firstChild)
-    }
-    for (let i = 0; i < playerNames.length; i++)
-    {
-        if (playerNames[i] == selectedName)
-        {
-            continue
-        }
-        toSelector.innerHTML = toSelector.innerHTML + "<option>" + playerNames[i] + "</option>"
-    }
+    // while (toSelector.firstChild)
+    // {
+    //     toSelector.removeChild(toSelector.firstChild)
+    // }
+    // for (let i = 0; i < playerNames.length; i++)
+    // {
+    //     if (playerNames[i] == selectedName)
+    //     {
+    //         continue
+    //     }
+    //     toSelector.innerHTML = toSelector.innerHTML + "<option>" + playerNames[i] + "</option>"
+    // }
 }
 
 
@@ -176,7 +183,6 @@ function reset()
 
             // Playerek beállítása a selectbe
             let options = ""
-            alert("adf")
             for (let i = 0; i < data.players.length; i++)
             {
                 options = options + "<option>" + data.players[i].name + "</option>"
@@ -299,3 +305,10 @@ function transactionCardGenerator(type, to, from, money)
 }
 
 reset()
+
+
+if (localStorage.getItem("keyType") == "view")
+{
+    setInterval(reset, 2000)
+}
+  
