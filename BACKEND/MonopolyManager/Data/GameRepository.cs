@@ -14,7 +14,7 @@ public class GameRepository : IGameRepository
 
     public void Create(Game game)
     {
-        throw new NotImplementedException();
+        _repo.Add(game);
     }
 
     public IEnumerable<Game> Read()

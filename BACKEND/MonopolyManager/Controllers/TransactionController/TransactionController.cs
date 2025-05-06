@@ -3,6 +3,7 @@ using MonopolyManager.Data;
 using MonopolyManager.Enums;
 using MonopolyManager.Models.IncomingData;
 using MonopolyManager.Models;
+using MonopolyManager.Models.OutgoingData;
 
 namespace MonopolyManager.Controllers.TransactionController;
 
@@ -18,18 +19,18 @@ public class TransactionController
     }
     
     [HttpPost]
-    public void Create([FromBody] TransactionCreate transactionData)
+    public TransactionCreationDataOut? Create([FromBody] TransactionCreate transactionData)
     {
         Game? game = _repo.Read(transactionData.GameKey);
         if (game == null)
         {
-            return;
+            return null;
         }
 
         // In case that the given key is only a view key
         if (game.Key != transactionData.GameKey)
         {
-            return;
+            return null;
         }
         
         Transaction transaction = new Transaction();
@@ -99,8 +100,9 @@ public class TransactionController
             case TransactionType.Start:
                 foreach (var player in game.Players)
                 {
-                    if (player.Name.Equals(transactionData.From))
+                    if (player.Name.Equals(transactionData.To))
                     {
+                        transaction.Amount = game.StartTileMoney;
                         player.Money += game.StartTileMoney;
                         transaction.Result = TransactionResult.Successful;
                     }
@@ -108,5 +110,6 @@ public class TransactionController
                 break;
         }
         game.Transactions.Add(transaction);
+        return new TransactionCreationDataOut() {Result = transaction.Result};
     }
 }

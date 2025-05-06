@@ -26,6 +26,7 @@ public sealed class GameController
         newGame.StartMoney = dataIn.StartMoney;
         newGame.StartTileMoney = dataIn.StartTileMoney;
         newGame.Transactions = new List<Transaction>();
+        newGame.Players = new List<Player>();
 
         foreach (var player in dataIn.Players)
         {
@@ -40,7 +41,25 @@ public sealed class GameController
     [HttpGet("{key}")]
     public Game? Get(string key)
     {
-        return _repo.Read(key);
+        Game? game = _repo.Read(key);
+        if (game == null)
+        {
+            return game;
+        }
+
+        if (key == game.ViewKey)
+        {
+            Game gameOut = new Game()
+            {
+                Key = "0", ViewKey = game.ViewKey, StartMoney = game.StartMoney,
+                StartTileMoney = game.StartTileMoney, Players = game.Players,
+                Transactions = game.Transactions
+            };
+            return gameOut;
+        }
+
+        return game;
+
     }
 
     private string GenerateNewGameKey()
