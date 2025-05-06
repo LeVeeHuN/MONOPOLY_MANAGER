@@ -17,12 +17,12 @@
     <div class="container d-flex justify-content-center align-items-center flex-grow-1">
         <div class="card p-4 shadow" style="min-width: 320px; max-width: 400px; width: 100%;">
             <div class="d-grid mb-3">
-                <button class="btn btn-primary fw-bold" type="button">Új játék</button>
+                <button class="btn btn-primary fw-bold" type="button" id="newgamebtn">Új játék</button>
             </div>
             <hr>
             <form class="d-flex gap-2">
-                <input type="text" class="form-control" placeholder="Játék azonosító">
-                <button class="btn btn-success fw-bold" type="submit">Csatlakozás játékhoz</button>
+                <input type="text" class="form-control" placeholder="Játék azonosító" id="gamekeyinput">
+                <button class="btn btn-success fw-bold" type="submit" id="joingamebtn">Csatlakozás játékhoz</button>
             </form>
         </div>
     </div>
@@ -30,5 +30,7 @@
     <footer class="bg-primary text-white text-center py-3">
         Created by Levente Bajnoczi
     </footer>
+
+    <script src="joingame.js"></script>
 </body>
 </html>

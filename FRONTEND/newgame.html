@@ -33,11 +33,11 @@
           <div id="playerFields">
             <div class="mb-3">
               <label for="player1" class="form-label">Játékos 1</label>
-              <input type="text" class="form-control" id="player1" name="player1" required>
+              <input type="text" class="form-control player-name-input" id="player-1" name="player1" required>
             </div>
             <div class="mb-3">
               <label for="player2" class="form-label">Játékos 2</label>
-              <input type="text" class="form-control" id="player2" name="player2" required>
+              <input type="text" class="form-control player-name-input" id="player-2" name="player2" required>
             </div>
           </div>
           <div class="row">
@@ -45,7 +45,7 @@
               <button type="button" id="addPlayerBtn" class="btn btn-outline-primary">Új játékos</button>
             </div>
             <div class="col-6 d-grid">
-              <button type="submit" class="btn btn-primary">Játék létrehozása</button>
+              <button type="submit" class="btn btn-primary" id="createGameBtn">Játék létrehozása</button>
             </div>
           </div>
         </form>
@@ -68,16 +68,12 @@
       div.className = 'mb-3';
       div.innerHTML = `
         <label for="player${playerCount}" class="form-label">Játékos ${playerCount}</label>
-        <input type="text" class="form-control" id="player${playerCount}" name="player${playerCount}" required>
+        <input type="text" class="form-control player-name-input" id="player-${playerCount}" name="player${playerCount}" required>
       `;
       playerFields.appendChild(div);
     });
-
-    // Optional: Prevent form submission for demonstration
-    document.getElementById('createGameForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('Játék létrehozva!');
-    });
   </script>
+
+  <script src="creategame.js"></script>
 </body>
 </html>
