@@ -58,7 +58,7 @@ function createTransaction(event)
         transactionCreateData.amount = 2000000
     }
     const jsonString = JSON.stringify(transactionCreateData)
-    console.log(transactionCreateData)
+    // console.log(transactionCreateData)
     
 
     fetch("http://localhost:5078/transaction", {
@@ -70,7 +70,7 @@ function createTransaction(event)
     })
     .then(response => response.json())
     .then(responseData => {
-        console.log(responseData);
+        // console.log(responseData);
         
         reset()
     })
@@ -163,7 +163,7 @@ function reset()
     fetch(`http://localhost:5078/game/${keyObj.key}`)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+            // console.log(data);
             const viewKeyBox = document.getElementById("viewKeyBox")
             
             masterKeyBox.innerHTML = data.key

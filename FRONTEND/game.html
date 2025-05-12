@@ -17,21 +17,19 @@
     <div class="row mb-4">
       <div class="col-auto">
         <div class="d-flex align-items-center gap-3">
-          <!-- Blue box with text and button inside -->
           <div class="bg-primary text-white rounded fw-bold d-flex align-items-center px-2" style="width: 150px; height: 44px;">
             <span id="masterKeyBox" class="flex-grow-1 ps-2">ABC123</span>
             <button id="toggleBtn" class="btn btn-outline-light btn-sm ms-2" type="button">Elrejt</button>
           </div>
-          <!-- Gray box without button -->
           <div class="bg-secondary text-white px-3 py-2 rounded fw-bold" id="viewKeyBox" style="width: 90px; text-align: center;">
-            XYZ789
+            XXXXXX
           </div>
         </div>
       </div>
     </div>
     <!-- Transaction, Transactions, and Players row -->
     <div id="baseContainer" class="row">
-      <!-- Transaction Card (wider) -->
+      <!-- Transaction Card -->
       <div id="createTransaction" class="col-md-6 col-lg-5 mb-4">
         <div class="card shadow-sm">
           <div class="card-header bg-primary text-white fw-bold">
@@ -51,21 +49,11 @@
               <div class="mb-3">
                 <label id="fromPlayerLabel" for="fromPlayer" class="form-label">Kitől</label>
                 <select class="form-select" id="fromPlayer">
-                  <option>Anna</option>
-                  <option>Béla</option>
-                  <option>Cecil</option>
-                  <option>Dávid</option>
-                  <option>Emese</option>
                 </select>
               </div>
               <div class="mb-3">
                 <label id="toPlayerLabel" for="toPlayer" class="form-label">Kinek</label>
                 <select class="form-select" id="toPlayer">
-                  <option>Anna</option>
-                  <option>Béla</option>
-                  <option>Cecil</option>
-                  <option>Dávid</option>
-                  <option>Emese</option>
                 </select>
               </div>
               <div class="mb-3">
@@ -77,81 +65,23 @@
           </div>
         </div>
       </div>
-      <!-- Transactions Card (now in the middle) -->
+      <!-- Transactions Card -->
       <div id="transactionBaseContainer" class="col-md-3 col-lg-4 mb-4">
         <div class="card shadow-sm h-100">
           <div class="card-header bg-primary text-white fw-bold">
             Tranzakciók
           </div>
           <div id="transactionsHolder" class="card-body p-2" style="max-height: 400px; overflow-y: auto;">
-            <!-- Example transaction cards with requested colors -->
-            <div class="card mb-2 bg-warning text-dark">
-              <div class="card-body py-2 px-3">
-                <strong>Utalás:</strong> Anna → Béla<br>
-                <small>Összeg: 200</small>
-              </div>
-            </div>
-            <div class="card mb-2 bg-success text-white">
-              <div class="card-body py-2 px-3">
-                <strong>Pénz hozzáadás:</strong> Cecil<br>
-                <small>Összeg: 100</small>
-              </div>
-            </div>
-            <div class="card mb-2 bg-danger text-white">
-              <div class="card-body py-2 px-3">
-                <strong>Pénz elvétel:</strong> Dávid<br>
-                <small>Összeg: 50</small>
-              </div>
-            </div>
-            <div class="card mb-2 bg-primary text-white">
-              <div class="card-body py-2 px-3">
-                <strong>Start:</strong> Emese<br>
-                <small>Összeg: 200</small>
-              </div>
-            </div>
-            <div class="card mb-2 bg-warning text-dark">
-              <div class="card-body py-2 px-3">
-                <strong>Utalás:</strong> Béla → Anna<br>
-                <small>Összeg: 300</small>
-              </div>
-            </div>
-            <div class="card mb-2 bg-success text-white">
-              <div class="card-body py-2 px-3">
-                <strong>Pénz hozzáadás:</strong> Dávid<br>
-                <small>Összeg: 250</small>
-              </div>
-            </div>
-            <!-- Add more transactions as needed -->
           </div>
         </div>
       </div>
-      <!-- Players Card (now rightmost) -->
+      <!-- Players Card -->
       <div id="playersBaseContainer" class="col-md-3 col-lg-3 mb-4">
         <div class="card shadow-sm">
           <div class="card-header bg-secondary text-white fw-bold">
             Játékosok
           </div>
           <ul class="list-group list-group-flush" id="playerHolder">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              Anna
-              <span class="badge bg-success rounded-pill">1500</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              Béla
-              <span class="badge bg-success rounded-pill">1500</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              Cecil
-              <span class="badge bg-success rounded-pill">1500</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              Dávid
-              <span class="badge bg-success rounded-pill">1500</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              Emese
-              <span class="badge bg-success rounded-pill">1500</span>
-            </li>
           </ul>
         </div>
       </div>
