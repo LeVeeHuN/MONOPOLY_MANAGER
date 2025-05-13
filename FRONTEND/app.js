@@ -24,7 +24,7 @@ transactionTypeSelector.addEventListener("change", transactionTypeChanged)
 
 const fromSelector = document.getElementById("fromPlayer")
 const toSelector = document.getElementById("toPlayer")
-fromSelector.addEventListener("change", removeDuplicateNames)
+fromSelector.addEventListener("change", removeSelectedNameFromToSelector)
 
 const createTransactionBtn = document.getElementById("createTransactionBtn")
 createTransactionBtn.addEventListener("click", createTransaction)
@@ -97,7 +97,7 @@ function transactionTypeChanged()
         fromSelectorLabel.classList.remove("d-none")
         toSelector.classList.remove("d-none")
         toSelectorLabel.classList.remove("d-none")
-        removeDuplicateNames()
+        removeSelectedNameFromToSelector()
     }
     else if (selectedIndex == 2 || selectedIndex == 4)
     {
@@ -120,6 +120,7 @@ function transactionTypeChanged()
             moneyInputBox.classList.add("d-none")
             moneyInputLabel.classList.add("d-none")
         }
+        addNamesToTransferBoxes()
     }
     else if (selectedIndex == 3)
     {
@@ -128,29 +129,59 @@ function transactionTypeChanged()
         fromSelectorLabel.classList.remove("d-none")
         toSelector.classList.add("d-none")
         toSelectorLabel.classList.add("d-none")
+        addNamesToTransferBoxes()
     }
-    
 }
 
-function removeDuplicateNames()
+function addNamesToTransferBoxes(skipFromInput)
 {
-    // const selectedName = fromSelector.value
+    // remove all names
+    while (fromSelector.firstChild && !skipFromInput)
+    {
+        fromSelector.removeChild(fromSelector.firstChild)
+    }
+    while (toSelector.firstChild)
+    {
+        toSelector.removeChild(toSelector.firstChild)
+    }
 
-    // while (toSelector.firstChild)
-    // {
-    //     toSelector.removeChild(toSelector.firstChild)
-    // }
-    // for (let i = 0; i < playerNames.length; i++)
-    // {
-    //     if (playerNames[i] == selectedName)
-    //     {
-    //         continue
-    //     }
-    //     toSelector.innerHTML = toSelector.innerHTML + "<option>" + playerNames[i] + "</option>"
-    // }
+    // add names
+    for (let i = 0; i < playerNames.length; i++)
+    {
+        const nameOption1 = document.createElement("option")
+        const nameOption2 = document.createElement("option")
+        nameOption1.innerHTML = playerNames[i]
+        nameOption2.innerHTML = playerNames[i]
+        toSelector.appendChild(nameOption2)
+        if (!skipFromInput)
+        {
+            fromSelector.appendChild(nameOption1)
+        }
+    }
 }
 
+function removeNameFromToSelector(nameToRemove)
+{
+    addNamesToTransferBoxes(true)
+    if (transactionTypeSelector.selectedIndex+1 != 1)
+    {
+        return
+    }
+    for (let i = 0; i < toSelector.children.length; i++)
+    {
+        const currentChild = toSelector.children[i]
+        if (currentChild.innerHTML == nameToRemove)
+        {
+            toSelector.removeChild(currentChild)
+        }
+    }
+}
 
+function removeSelectedNameFromToSelector()
+{
+    const selectedName = fromSelector.value
+    removeNameFromToSelector(selectedName)
+}
 
 
 const keyObj = new Object()
@@ -226,8 +257,7 @@ function reset()
                 playerHolder.appendChild(playerCardGenerator(name, money))
                 playerNames.push(name)
             }
-
-            removeDuplicateNames()
+            removeSelectedNameFromToSelector()
         })
         .catch(error => console.error('Error:', error))
 }
